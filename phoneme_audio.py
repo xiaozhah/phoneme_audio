@@ -2,16 +2,20 @@ import os
 import ui
 import sound
 
-# Define the button click event handler function
-def button_tapped(sender):
+# Define the button click event handler functions
+def phoneme_tapped(sender):
     sound_name = os.path.join('audio', sender.name + '_isolation.mp3')
+    sound.play_effect(sound_name)
+
+def word_tapped(sender):
+    sound_name = os.path.join('audio', sender.name + '_words.mp3')
     sound.play_effect(sound_name)
 
 # Create the main view
 scroll_view = ui.ScrollView()
 scroll_view.background_color = 'white'
 scroll_view.flex = 'WH'
-scroll_view.content_size = (ui.get_screen_size().width, 900)  # Assuming content height is 1500, adjust as needed
+scroll_view.content_size = (ui.get_screen_size().width, 900)  # Assuming content height is 900, adjust as needed
 content_view = ui.View(frame=(0, 0, scroll_view.content_size[0], scroll_view.content_size[1]))
 scroll_view.add_subview(content_view)
 
@@ -65,27 +69,39 @@ for section_title, buttons in sections:
     y_offset += 40
     
     for i, (symbol, word) in enumerate(buttons):
-        # Create the button
-        button = ui.Button(name=symbol)
-        button.frame = (10 + (i % 6) * 60, y_offset + (i // 6) * 60, 50, 50)
-        button.background_color = 'white'
-        button.tint_color = 'black'
-        button.border_width = 1
-        button.corner_radius = 5
-        button.action = button_tapped  # Bind the event handler function
+        # Create a container view for the phoneme and word buttons
+        container_view = ui.View(frame=(10 + (i % 6) * 60, y_offset + (i // 6) * 60, 50, 50))
+        container_view.border_width = 1
+        container_view.corner_radius = 10
         
-        # Create the label to display multi-line text
-        label = ui.Label()
-        label.frame = (0, 0, button.width, button.height)
-        label.text = f"{symbol}\n{word}"
-        label.font = ('<system>', 16)
-        label.alignment = ui.ALIGN_CENTER
-        label.number_of_lines = 2  # Allow multiple lines
-        button.add_subview(label)
+        # Create the phoneme button
+        phoneme_button = ui.Button(name=symbol)
+        phoneme_button.frame = (0, 0, container_view.width, container_view.height / 2)
+        phoneme_button.background_color = 'white'
+        phoneme_button.tint_color = ' black'
+        phoneme_button.border_color = 'white'
+        phoneme_button.border_width = 1
+        phoneme_button.corner_radius = 5
+        phoneme_button.title = symbol
+        phoneme_button.action = phoneme_tapped  # Bind the phoneme event handler function
+        container_view.add_subview(phoneme_button)
         
-        content_view.add_subview(button)
+        # Create the word button
+        word_button = ui.Button(name=symbol)
+        word_button.frame = (0, container_view.height / 2, container_view.width, container_view.height / 2)
+        word_button.background_color = 'white'
+        word_button.tint_color = 'black'
+        word_button.border_color = 'white'
+        word_button.border_width = 1
+        word_button.corner_radius = 5
+        word_button.title = word
+        word_button.action = word_tapped  # Bind the word event handler function
+        container_view.add_subview(word_button)
+        
+        content_view.add_subview(container_view)
     
     y_offset += (len(buttons) // 6 + 1) * 60
 
 # Show the view
 scroll_view.present('fullscreen')
+
