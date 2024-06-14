@@ -43,20 +43,20 @@ content_view.add_subview(instruction_label)
 # Define the button content
 sections = [
     ("Consonants", [
-        ("p", "pen"), ("b", "bad"), ("t", "tea"), ("d", "did"), ("k", "cat"), ("g", "get"),
-        ("m", "man"), ("n", "now"), ("ŋ", "sing"), ("f", "fall"), ("v", "van"),
-        ("θ", "thin"), ("ð", "this"), ("s", "see"), ("z", "zoo"), ("ʃ", "shoe"), ("ʒ", "vision"),
-        ("tʃ", "chain"), ("dʒ", "jam"), ("l", "leg"), ("r", "red"), ("h", "hat"), ("x", "loch"),
+        ("p", "pen"), ("b", "bag"), ("t", "tie"), ("d", "dog"), ("k", "key"), ("g", "girl"),
+        ("m", "man"), ("n", "nose"), ("ŋ", "singer"), ("f", "fall"), ("v", "van"),
+        ("θ", "thin"), ("ð", "this"), ("s", "see"), ("z", "zoo"), ("ʃ", "shoe"), ("ʒ", "genre"),
+        ("tʃ", "chain"), ("dʒ", "jazz"), ("l", "leg"), ("r", "red"), ("h", "house"), ("x", "Hanukkah"),
         ("j", "yes"), ("w", "wet")
     ]),
     ("Vowels", [
-        ("iː", "see"), ("ɪ", "happy"), ("e", "bed"), ("æ", "cat"),
-        ("ə", "about"), ("ɜː", "fur"), ("ʌ", "cup"), ("uː", "too"), ("ʊ", "put"),
-        ("ɔː", "saw"), ("ɒ", "got"), ("ɑː", "father")
+        ("iː", "eat"), ("ɪ", "if"), ("e", "egg"), ("æ", "add"),
+        ("ə", "about"), ("ɜː", "earth"), ("ʌ", "up"), ("uː", "ooze"), ("ʊ", "oops"),
+        ("ɔː", "xxx"), ("ɒ", "on"), ("ɑː", "arm")
     ]),
     ("Diphthongs", [
-        ("eɪ", "say"), ("əʊ", "go"), ("aɪ", "my"), ("aʊ", "now"), ("ɔɪ", "boy"),
-        ("ɪə", "near"), ("eə", "hair"), ("ʊə", "pure")
+        ("eɪ", "eight"), ("əʊ", "open"), ("aɪ", "ice"), ("aʊ", "out"), ("ɔɪ", "oil"),
+        ("ɪə", "ear"), ("eə", "airport"), ("ʊə", "tourist")
     ])
 ]
 
