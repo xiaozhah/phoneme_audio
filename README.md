@@ -22,5 +22,4 @@ Run the script in Pythonista. The app will display a list of phonetic symbols an
 
 ## UI
 
-![UI](https://example.com/image.jpg)
-
+<img src="https://github.com/xiaozhah/phoneme_audio/blob/main/UI.png" width="30%">
