@@ -80,11 +80,12 @@ for section_title, buttons in sections:
         phoneme_button = ui.Button(name=symbol)
         phoneme_button.frame = (0, 0, container_view.width, container_view.height / 2)
         phoneme_button.background_color = 'white'
-        phoneme_button.tint_color = ' black'
+        phoneme_button.tint_color = 'black'
         phoneme_button.border_color = 'white'
         phoneme_button.border_width = 1
         phoneme_button.corner_radius = 5
         phoneme_button.title = symbol
+        phoneme_button.font = ('<system-bold>', 16)  # 设置音标按钮的字体为粗体
         phoneme_button.action = phoneme_tapped  # Bind the phoneme event handler function
         container_view.add_subview(phoneme_button)
         
