@@ -50,8 +50,8 @@ sections = [
         ("j", "yes"), ("w", "wet")
     ]),
     ("Vowels", [
-        ("iː", "eat"), ("ɪ", "if"), ("e", "egg"), ("æ", "add"),
-        ("ə", "about"), ("ɜː", "earth"), ("ʌ", "up"), ("uː", "ooze"), ("ʊ", "oops"),
+        ("iː", "eat"), ("i", "anyway"), ("ɪ", "if"), ("e", "egg"), ("æ", "add"),
+        ("ə", "about"), ("ɜː", "earth"), ("ʌ", "up"), ("uː", "ooze"), ("u", "actual"), ("ʊ", "oops"),
         ("ɔː", "order"), ("ɒ", "on"), ("ɑː", "arm")
     ]),
     ("Diphthongs", [
