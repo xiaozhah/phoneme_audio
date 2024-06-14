@@ -4,10 +4,12 @@ import sound
 
 # Define the button click event handler functions
 def phoneme_tapped(sender):
+    sound.stop_all_effects()  # Stop all currently playing sound effects
     sound_name = os.path.join('audio', sender.name + '_isolation.mp3')
     sound.play_effect(sound_name)
 
 def word_tapped(sender):
+    sound.stop_all_effects()  # Stop all currently playing sound effects
     sound_name = os.path.join('audio', sender.name + '_words.mp3')
     sound.play_effect(sound_name)
 
