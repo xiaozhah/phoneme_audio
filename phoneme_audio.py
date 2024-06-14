@@ -52,7 +52,7 @@ sections = [
     ("Vowels", [
         ("iː", "eat"), ("ɪ", "if"), ("e", "egg"), ("æ", "add"),
         ("ə", "about"), ("ɜː", "earth"), ("ʌ", "up"), ("uː", "ooze"), ("ʊ", "oops"),
-        ("ɔː", "xxx"), ("ɒ", "on"), ("ɑː", "arm")
+        ("ɔː", "order"), ("ɒ", "on"), ("ɑː", "arm")
     ]),
     ("Diphthongs", [
         ("eɪ", "eight"), ("əʊ", "open"), ("aɪ", "ice"), ("aʊ", "out"), ("ɔɪ", "oil"),
