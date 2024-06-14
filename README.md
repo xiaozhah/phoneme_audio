@@ -1,6 +1,6 @@
 # English Sounds Practice App
 
-This is a simple Pythonista-based application for practicing the sounds of British English. The app displays buttons for consonants, vowels, and diphthongs, each paired with an example word. Users can click on the phonetic symbol to hear its pronunciation and on the word to hear the word's pronunciation. The audio files used are sourced from the Oxford Dictionary.
+This is a simple Pythonista-based application for practicing the sounds of British English. The app displays buttons for consonants, vowels, and diphthongs, each paired with an example word. Users can click on the phonetic symbol to hear its pronunciation and on the word to hear the word's pronunciation. The audio files used are sourced from the [Oxford Dictionary](https://ispeaker.cp.com.cn/ispeaker/sounds).
 
 ## Features
 
