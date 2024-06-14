@@ -19,3 +19,8 @@ To use this app, you need to have Pythonista installed on your iOS device.
 ## Usage
 
 Run the script in Pythonista. The app will display a list of phonetic symbols and example words. Tap on a phonetic symbol to hear its pronunciation, or tap on an example word to hear how the word is pronounced.
+
+## UI
+
+![UI](https://example.com/image.jpg)
+
