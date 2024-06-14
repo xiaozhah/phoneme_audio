@@ -14,7 +14,7 @@ To use this app, you need to have Pythonista installed on your iOS device.
 
 1. Open Pythonista.
 2. Create a new Python script.
-3. Copy and paste the following code into the script.
+3. Copy and paste the following code and audio files into the script.
 
 ## Usage
 
