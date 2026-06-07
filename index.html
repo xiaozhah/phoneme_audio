@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Practise the sounds of British English. Tap a phonetic symbol to hear it, tap the example word to hear the word." />
+
+  <!-- PWA / add-to-home-screen -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Sounds" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+
+  <title>Sounds — British English</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1 class="title">Sounds</h1>
+    <p class="subtitle">British English</p>
+    <p class="instruction">Choose a sound to practise</p>
+  </header>
+
+  <main id="content" class="content">
+    <!-- Sections are rendered here by app.js -->
+  </main>
+
+  <footer class="app-footer">
+    <p>Audio from the <a href="https://oalecd10.cp.com.cn/#/desktop/dict" target="_blank" rel="noopener">Oxford Dictionary</a>. Tap a symbol to hear the sound; tap the word to hear the word.</p>
+  </footer>
+
+  <!-- Single shared audio element -->
+  <audio id="player" preload="none"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>

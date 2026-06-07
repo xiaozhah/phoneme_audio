@@ -1,0 +1,19 @@
+{
+  "name": "Sounds — British English",
+  "short_name": "Sounds",
+  "description": "Practise the sounds of British English. Tap a phonetic symbol to hear it, tap the example word to hear the word.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
