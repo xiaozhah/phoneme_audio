@@ -155,7 +155,7 @@ def aqi_bands(ax, ymax, labels=True):
     for (lo, hi, ilo, ihi), name in zip(BP, CAT):
         if lo > ymax: break
         ax.axhline(hi, color=GRID, lw=0.8, zorder=0)
-        if labels and (min(hi, ymax) - lo) >= ymax * 0.075:
+        if labels and (min(hi, ymax) - lo) >= ymax * 0.09:
             ax.text(1.005, (lo + min(hi, ymax)) / 2, f"AQI {ilo}–{ihi}\n{name}", transform=ax.get_yaxis_transform(),
                     va="center", ha="left", fontsize=8, color=MUTED)
 
@@ -204,7 +204,7 @@ ax.bar(xs, cnsy.per10k, width=0.7, color=cols, zorder=2)
 for xv, (y, r) in zip(xs, cnsy.iterrows()):
     ax.text(xv, r.per10k, f"{r.per10k:.1f}" if r.reliable else f"{r.per10k:.1f}\n存档不足", ha="center", va="bottom", fontsize=8.5, color=INK2)
 ax.set_ylabel("每万条标题中\n含“雾霾/霾/PM2.5”")
-ax.set_title(f"中国新闻网（中新社）全部滚动新闻标题中雾霾相关标题占比   峰值 {peak_cns} 年：每万条 {cnsy.per10k.max():.1f} 条，共 {int(cnsy.loc[peak_cns,'hits'])} 条",
+ax.set_title(f"中国新闻网（中新社）全部滚动新闻标题中雾霾相关标题占比   峰值 {peak_cns} 年：每万条 {cnsy.loc[peak_cns,'per10k']:.1f} 条（按存档缺失补齐约 {int(cnsy.loc[peak_cns,'est_full_year_hits'])} 条）",
              loc="left", fontsize=11, color=INK)
 peak_band(ax); ax.grid(axis="y", color=GRID, lw=0.6); ax.set_axisbelow(True)
 
@@ -215,7 +215,7 @@ ax.bar(xs, nyty.hits, width=0.7, color=cols, zorder=2)
 for xv, (y, r) in zip(xs, nyty.iterrows()):
     ax.text(xv, r.hits, f"{int(r.hits)}", ha="center", va="bottom", fontsize=8.5, color=INK2)
 ax.set_ylabel("篇数")
-ax.set_title(f"《纽约时报》标题同时提及“雾霾/空气污染”与“中国/北京等”的文章数   峰值 {peak_nyt} 年：{int(nyty.hits.max())} 篇",
+ax.set_title(f"《纽约时报》标题同时提及“雾霾/空气污染”与“中国/北京等”的文章数   最多 {peak_nyt} 年 {int(nyty.hits.max())} 篇，{PEAK} 年 {int(nyty.loc[PEAK,'hits'])} 篇（样本小，作国际视角参考）",
              loc="left", fontsize=11, color=INK)
 peak_band(ax, peak_nyt); ax.grid(axis="y", color=GRID, lw=0.6); ax.set_axisbelow(True)
 for a_ in axes: year_axis(a_)
