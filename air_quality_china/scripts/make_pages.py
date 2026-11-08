@@ -175,8 +175,14 @@ def p_heat(pdf, o, loc):
     name = "全国（所有城市均值）" if loc == "全国城市均值" else loc
     fig, S = page(o, (f"{name} 逐月 US AQI 热力图 2010–2026", f"{name}\n逐月 US AQI 热力图 2010–2026"),
                   sub=f"格内数字=月均 PM2.5 换算的 US AQI；黑框={PEAK}年（雾霾新闻最多）",
-                  note=SRC_PM + " 颜色为美国EPA官方AQI配色。", legend_rows=1 if o == "L" else 2)
-    ax = axes_box(fig, o, left=0.08 if o == "L" else 0.12, right=0.98)
+                  note=SRC_PM + " 颜色为美国EPA官方AQI配色。", legend_rows=0)
+    W, H = S["fig"]
+    fig._bottom += 0.14 / H                         # room for vertical year labels
+    h_in = (fig._top - fig._bottom) * H            # available height (inches)
+    cell = h_in / 12                                # square cell size
+    w_in = cell * len(YEARS)
+    left = 0.075
+    ax = fig.add_axes([left, fig._bottom, w_in / W, h_in / H])
     M = tab[tab["地点"] == loc].pivot(index="月", columns="年", values="aqi").reindex(index=range(1, 13), columns=YEARS)
     cmap = ListedColormap(AQI_COLORS); norm = BoundaryNorm([0, 50.5, 100.5, 150.5, 200.5, 300.5, 500], 6)
     ax.pcolormesh(np.arange(len(YEARS) + 1), np.arange(13) + 0.5, np.ma.masked_invalid(M.values.astype(float)),
@@ -190,18 +196,20 @@ def p_heat(pdf, o, loc):
     ax.set_xlim(0, len(YEARS)); ax.set_ylim(12.5, 0.5)
     ax.set_xticks(np.arange(len(YEARS)) + 0.5)
     ax.set_xticklabels(YEARS, fontsize=S["tick"], rotation=90 if o == "P" else 0)
-    if o == "L": ax.set_xticklabels(YEARS, fontsize=S["tick"] - 1.5)
+    if o == "L": ax.set_xticklabels(YEARS, fontsize=S["tick"] - 1, rotation=90)
     ax.set_yticks(range(1, 13)); ax.set_yticklabels([f"{m}月" for m in range(1, 13)], fontsize=S["tick"])
     ax.tick_params(length=0)
     for s in ax.spines.values(): s.set_visible(False)
     j = YEARS.index(PEAK)
     ax.add_patch(plt.Rectangle((j, 0.5), 1, 12, fill=False, ec=INK, lw=2.2, zorder=5))
     if M.loc[:, 2010:2013].isna().all().all():
-        ax.text(2, 6.5, "2014年5月前\n无公开\n逐时数据", ha="center", va="center", fontsize=S["ann"], color=MUTED)
+        ax.text(1.5, 6.5, "2014年\n5月前\n无公开\n数据", ha="center", va="center", fontsize=S["ann"] - 1, color=MUTED, linespacing=1.3)
     handles = [plt.Rectangle((0, 0), 1, 1, color=c) for c in AQI_COLORS]
     labels = [f"{a}–{b} {n}" for (_, _, a, b), n in zip(BP, CAT)]
-    fig.legend(handles, labels, loc="lower left", bbox_to_anchor=(0.03 if o == "L" else 0.04, fig._legend_y),
-               ncol=6 if o == "L" else 3, frameon=False, fontsize=S["note"] + 0.5, handlelength=1.2, columnspacing=1)
+    ax.set_aspect("equal", adjustable="box")
+    fig.legend(handles, labels, loc="center left", bbox_to_anchor=(left + w_in / W + 0.02, fig._bottom + (fig._top - fig._bottom) / 2),
+               ncol=1, frameon=False, fontsize=S["sub"] - 0.5, handlelength=1.3, handleheight=1.3, labelspacing=0.9,
+               title="US AQI 等级", title_fontsize=S["sub"], alignment="left")
     pdf.savefig(fig, facecolor=SURF); plt.close(fig)
 
 def p_manchester(pdf, o):
