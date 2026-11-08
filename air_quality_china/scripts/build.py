@@ -13,7 +13,7 @@ W = sys.argv[1]               # scratch root
 OUT = sys.argv[2]             # deliverable dir
 os.makedirs(OUT, exist_ok=True)
 fm.fontManager.addfont("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc")
-plt.rcParams.update({"font.family": "WenQuanYi Zen Hei", "axes.unicode_minus": False,
+plt.rcParams.update({"font.family": "WenQuanYi Zen Hei", "axes.unicode_minus": False, "pdf.fonttype": 42,
                      "font.size": 10.5, "axes.spines.top": False, "axes.spines.right": False,
                      "axes.edgecolor": "#8a8984", "axes.labelcolor": "#52514e",
                      "xtick.color": "#52514e", "ytick.color": "#52514e"})
@@ -225,7 +225,7 @@ fig.text(0.01, 0.005,
          "2026年为1–10月。新闻：逐日抓取中国新闻网滚动新闻页与《纽约时报》站点地图全部标题后按关键词计数；2026年截至11月7日。",
          fontsize=8, color=MUTED, va="bottom")
 fig.tight_layout(rect=(0, 0.035, 0.93, 1))
-fig.savefig(f"{OUT}/fig1_年均PM25与雾霾新闻.png", dpi=170, facecolor=SURF)
+fig.savefig(f"{OUT}/fig1_年均PM25与雾霾新闻.pdf", facecolor=SURF); fig.savefig(f"{OUT}/fig1_年均PM25与雾霾新闻.png", dpi=170, facecolor=SURF)
 
 # Figure 2: monthly small multiples
 fig, axes = plt.subplots(5, 1, figsize=(13, 15), sharex=True)
@@ -256,7 +256,7 @@ for a_ in axes: year_axis(a_)
 fig.text(0.01, 0.004, "虚线=美国使领馆单站；实线=中国国控站全市均值；黑色短横=当年年均值；右侧为对应 US AQI 等级。红色底=雾霾新闻报道最多的年份（中国新闻网标题占比）。",
          fontsize=8.5, color=MUTED)
 fig.tight_layout(rect=(0, 0.015, 0.92, 1))
-fig.savefig(f"{OUT}/fig2_逐月PM25.png", dpi=150, facecolor=SURF)
+fig.savefig(f"{OUT}/fig2_逐月PM25.pdf", facecolor=SURF); fig.savefig(f"{OUT}/fig2_逐月PM25.png", dpi=150, facecolor=SURF)
 
 # Figure 3: heatmap year x month, US AQI
 from matplotlib.colors import BoundaryNorm, ListedColormap
@@ -269,7 +269,9 @@ for ax, loc in zip(axes, LOCS):
     t = tab[tab["地点"] == loc]
     M = t.pivot(index="年", columns="月", values="US AQI").reindex(index=years, columns=range(1, 13))
     P = t.pivot(index="年", columns="月", values="PM2.5(μg/m³)").reindex(index=years, columns=range(1, 13))
-    ax.imshow(np.ma.masked_invalid(M.values.astype(float)), cmap=cmap, norm=norm, aspect="auto")
+    ax.pcolormesh(np.arange(-0.5, 12), np.arange(-0.5, len(years)), np.ma.masked_invalid(M.values.astype(float)),
+                  cmap=cmap, norm=norm, edgecolors=SURF, linewidth=0.6)
+    ax.set_xlim(-0.5, 11.5); ax.set_ylim(len(years) - 0.5, -0.5)
     for i in range(len(years)):
         for j in range(12):
             v = M.values[i, j]
@@ -290,5 +292,5 @@ handles = [plt.Rectangle((0, 0), 1, 1, color=c) for c in aqi_colors]
 fig.legend(handles, [f"{a}–{b}  {n}" for (_, _, a, b), n in zip(BP, CAT)], loc="lower center", ncol=6, frameon=False, fontsize=9)
 fig.suptitle(f"逐月 US AQI 热力图（格内数字=月均PM2.5换算的US AQI；黑框={PEAK}年，雾霾新闻报道最多）", x=0.01, ha="left", fontsize=13, color=INK)
 fig.tight_layout(rect=(0.02, 0.05, 1, 0.96))
-fig.savefig(f"{OUT}/fig3_逐月USAQI热力图.png", dpi=160, facecolor=SURF)
+fig.savefig(f"{OUT}/fig3_逐月USAQI热力图.pdf", facecolor=SURF); fig.savefig(f"{OUT}/fig3_逐月USAQI热力图.png", dpi=160, facecolor=SURF)
 print("saved")
